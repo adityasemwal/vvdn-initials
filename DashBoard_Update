@@ -1,0 +1,44 @@
+import requests
+def check():
+    Pass = 0
+    Fail = 0
+    Total = 0
+    Noresult = 0
+    sites = ['site1.txt','site2.txt','site3.txt','site4.txt','site5.txt','site6.txt','site7.txt']
+    for i in sites:
+        Total += 1
+        value = passfail(i) #check if site has Fail status or not
+        if value == 'Pass':
+            Pass += 1
+        elif value == 'Fail':
+            Fail += 1
+        else:
+            Noresult += 1
+    return(Pass,Fail,Noresult,Total)
+
+def passfail(site):
+    f = open(site,'r')
+    data1 = f.read()
+    if 'Fail' in data1:
+        status = 'Fail'
+    elif 'Pass' in data1:
+        status = 'Pass'
+    else:
+        status = 'Noresult'
+    f.close()
+    return(status)
+
+Pass,Fail,Noresult,Total = check()
+#print(Pass,Fail,Noresult,Total)
+Status = 'Pass'
+
+if Fail > 0:
+    Status = 'Fail' #If any Fail found
+#print(Status)
+url = 'my url'
+headers = {"key name":"key value"}
+data = {'Status':Status,'Dashboard':'Health Dashboard'}
+
+r=requests.post(url=url,data=data,headers=headers)
+#print(r)
+
