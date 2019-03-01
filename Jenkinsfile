@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                echo 'Hello World ! Welcome to Jenkins'
+                echo 'Hello World ! Welcome to Jenkins, Polling function added'
             }
         }
     }
